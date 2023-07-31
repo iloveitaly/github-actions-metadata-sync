@@ -45,6 +45,8 @@ jobs:
 | nuget | ProjectName.csproj | csproj file for project |
 | python | ProjectName.toml | toml file for project |
 
+Note if using standard `PATH` inputs the `TYPE` input is not required.
+
 ## Tips
 For repo types that aren't listed above (like this one), you can still use this action, just have to get creative.
 
