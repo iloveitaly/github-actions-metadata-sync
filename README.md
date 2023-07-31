@@ -39,6 +39,30 @@ a personal access token instead:
 gh secret set GH_PERSONAL_TOKEN --app actions --body ghp_the_key
 ```
 
+Alternatively, you can let the action infer `TYPE` and `PATH` for you:
+
+```yaml
+name: Repo Sync
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  repo_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetching Local Repository
+        uses: actions/checkout@master
+      - name: Sync Repository Metadata
+        uses: kbrashears5/github-action-repo-sync@v1.0.0
+        with:
+          TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
+```
+
 ## Parameters
 | Parameter | Required | Description |
 | --- | --- | --- |
