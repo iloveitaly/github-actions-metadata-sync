@@ -33,6 +33,9 @@ if [ -z "$FILE_PATH" ]; then
         FILE_PATH="pyproject.toml"
     elif [ -f *.csproj ]; then
         FILE_PATH=$(ls *.csproj | head -n 1)
+    else
+        echo "File path not provided and could not be inferred"
+        exit 1
     fi
 fi
 
@@ -43,6 +46,9 @@ elif [[ -z "$REPO_TYPE" && "$FILE_PATH" == "pyproject.toml" ]]; then
     REPO_TYPE="python"
 elif [[ -z "$REPO_TYPE" && "$FILE_PATH" == *".csproj" ]]; then
     REPO_TYPE="nuget"
+else
+    echo "Repo type not provided and could not be inferred"
+    exit 1
 fi
 
 # set temp path
