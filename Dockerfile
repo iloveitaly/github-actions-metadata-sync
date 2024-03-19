@@ -1,7 +1,7 @@
 # https://pkgs.alpinelinux.org/packages
 FROM alpine:latest
 
-RUN apk add --no-cache bash
+RUN apk add bash
 
 RUN apk add git
 
@@ -9,13 +9,15 @@ RUN apk add git
 RUN apk add jq
 
 # for toml parsing
-RUN apk add --no-cache yq
+RUN apk add yq
 
 # add grep for xml parsing
 RUN apk add grep
 
 # add curl for github api commands
 RUN apk add curl
+
+RUN rm -rf /var/cache/apk/*
 
 COPY error-matcher.json /error-matcher.json
 

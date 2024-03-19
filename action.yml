@@ -1,6 +1,6 @@
 name: 'Repo Metadata Sync'
 description: 'Github Action to sync repo metadata (description, topics, homepage) from code (npm, nuget, python) to repo'
-author: 'kbrashears5'
+author: 'iloveitaly'
 branding:
   icon: 'upload-cloud'
   color: 'purple'
@@ -25,4 +25,5 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  # set to `Dockerfile` to build at runtime
+  image: 'docker://ghcr.io/iloveitaly/github-actions-metadata-sync:latest'
