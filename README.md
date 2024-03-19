@@ -5,9 +5,11 @@ Github Action to sync repo metadata from code to repo.
 [![version](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)
 
 # Use Cases
-Keep the github metadata in sync with your code! Metadata is now configuration as code, and can be validated with a Pull Request.
+
+Keep the GitHub repo metadata (description, tags) in sync with your code! Metadata is now configuration as code, and can be validated with a Pull Request.
 
 # Setup
+
 Create a new file called `/.github/workflows/repo-sync.yml` that looks like so:
 
 ```yaml
