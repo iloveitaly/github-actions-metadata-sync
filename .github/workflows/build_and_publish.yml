@@ -21,7 +21,7 @@ jobs:
           docker build . --file Dockerfile \
             --platform linux/amd64 \
             --tag $IMAGE_NAME:"$(date +%s)" \
-            --tag $IMAGE_NAME:latest
+            --tag $IMAGE_NAME:latest \
             --tag $IMAGE_NAME:v1
 
       - name: Login to GitHub Container Registry
