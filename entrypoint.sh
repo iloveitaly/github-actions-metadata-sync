@@ -31,6 +31,8 @@ if [ -z "$FILE_PATH" ]; then
         FILE_PATH="package.json"
     elif [ -f "pyproject.toml" ]; then
         FILE_PATH="pyproject.toml"
+    elif [ -f "metadata.json" ]; then
+        FILE_PATH="metadata.json"
     elif [ -f *.csproj ]; then
         FILE_PATH=$(ls *.csproj | head -n 1)
     else
@@ -40,7 +42,7 @@ if [ -z "$FILE_PATH" ]; then
 fi
 
 # infer repo type if not provided
-if [[ -z "$REPO_TYPE" && "$FILE_PATH" == "package.json" ]]; then
+if [[ -z "$REPO_TYPE" && ("$FILE_PATH" == "package.json" || "$FILE_PATH" == "metadata.json") ]]; then
     REPO_TYPE="npm"
 elif [[ -z "$REPO_TYPE" && "$FILE_PATH" == "pyproject.toml" ]]; then
     REPO_TYPE="python"
