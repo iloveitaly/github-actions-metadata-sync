@@ -25,6 +25,10 @@ jobs:
           # gh secret set GH_PERSONAL_TOKEN --app actions --body ghp_
           password: ${{ secrets.GH_PERSONAL_TOKEN }}
 
+      - name: Set Docker tag
+        id: date
+        run: echo "::set-output name=DATE_STAMP::$(date +%s)"
+
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
         with:
@@ -33,6 +37,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:$(date +%s)
+            ${{ env.IMAGE_NAME }}:${{ steps.date.outputs.tag }}
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:v1
