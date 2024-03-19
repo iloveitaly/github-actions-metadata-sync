@@ -14,6 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # really important for ensuring that the package inherits the permissions of the repo
+    # https://stackoverflow.com/questions/77092191/use-github-to-change-visibility-of-ghcr-io-package
+    permissions: write-all
+
     steps:
       - uses: actions/checkout@v4
 
