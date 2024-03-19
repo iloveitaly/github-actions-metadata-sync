@@ -37,6 +37,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ steps.date.outputs.tag }}
+            ${{ env.IMAGE_NAME }}:${{ steps.date.outputs.DATE_STAMP }}
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:v1
