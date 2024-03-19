@@ -27,7 +27,7 @@ jobs:
 
       - name: Set Docker tag
         id: date
-        run: echo "::set-output name=DATE_STAMP::$(date +%s)"
+        run: echo "DATE_STAMP=$(date +%s)" > "$GITHUB_ENV"
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
