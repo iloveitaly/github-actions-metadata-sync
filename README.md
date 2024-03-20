@@ -100,4 +100,4 @@ For example (and I would recommend), you can create a file called `metadata.json
 }
 ```
 
-For example, see [.github/workflows/repo-sync.yml](.github/workflows/repo-metadata-sync.yml)` and `metadata.json` in this repo
+For example, see [.github/workflows/repo-sync.yml](.github/workflows/repo-metadata-sync.yml) and `metadata.json` in this repo

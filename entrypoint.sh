@@ -84,6 +84,7 @@ echo " "
 REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 GIT_PATH="${TEMP_PATH}${GITHUB_REPOSITORY}"
 echo "Cloning [$REPO_URL] to [$GIT_PATH]"
+# TODO since we are cloning here, why do we have a clone call in the repo yml?
 git clone --quiet --no-hardlinks --no-tags --depth 1 $REPO_URL ${GITHUB_REPOSITORY}
 
 cd $GIT_PATH

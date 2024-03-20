@@ -1,0 +1,3 @@
+- [ ] remove GITHUB_EMAIL, etc from logic
+- [ ] remove checkout action from example
+- [ ] fail action if auth fails
