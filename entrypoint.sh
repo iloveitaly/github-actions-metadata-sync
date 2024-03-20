@@ -71,6 +71,7 @@ REPO_NAME=${REPO_INFO[1]}
 echo "Repo name: [$REPO_NAME]"
 
 # initialize git
+# TODO pretty certain we can remove all of this and just use GITHUB_ACTOR
 echo "Intiializing git"
 git config --system core.longpaths true
 git config --global core.longpaths true

@@ -5,10 +5,10 @@ branding:
   icon: 'upload-cloud'
   color: 'purple'
 inputs:
-  INPUT_TYPE:
+  TYPE:
     description: 'Type of repo (i.e. npm, nuget, etc. - see README for full list)'
     required: false
-  INPUT_PATH:
+  PATH:
     description: 'Relative file path to the repos metadata file'
     required: false
   TOKEN:
