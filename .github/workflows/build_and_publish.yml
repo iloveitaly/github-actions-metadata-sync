@@ -7,7 +7,7 @@ on:
     branches: [main, master]
 
 env:
-  IMAGE_NAME: ghcr.io/iloveitaly/github-actions-metadata-sync
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
   build:
@@ -48,4 +48,4 @@ jobs:
             ${{ env.IMAGE_NAME }}:v1
           # this label is required to link the image to the repo, but for discovery *and* for permissioning
           labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
