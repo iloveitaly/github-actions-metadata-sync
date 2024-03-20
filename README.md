@@ -60,16 +60,16 @@ jobs:
         with:
           TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
           # optional params, these are inferred from the repo type!
-          INPUT_TYPE: npm
-          INPUT_PATH: package.json
+          TYPE: npm
+          PATH: package.json
 ```
 
 ## Parameters
 
 | Parameter | Required | Description |
 | --- | --- | --- |
-| INPUT_TYPE | true | Type of repo. See below for supported repo types |
-| INPUT_PATH | true | Path to the repo type's metadata file |
+| TYPE | true | Type of repo. See below for supported repo types |
+| PATH | true | Path to the repo type's metadata file |
 | TOKEN | true | Personal Access Token with Repo scope |
 
 ## Supported Repo Types
