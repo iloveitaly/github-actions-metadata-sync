@@ -9,7 +9,9 @@ on:
 jobs:
   repo_sync:
     runs-on: ubuntu-latest
-    permissions: write-all
+
+    # NOTE `permissions: write-all` is not sufficient to update repo metadata
+    #      a PAT must be used in order for this action to work
 
     steps:
       - name: Fetching Local Repository
@@ -19,4 +21,4 @@ jobs:
         uses: iloveitaly/github-actions-metadata-sync@v1
         with:
           # gh secret set GH_PERSONAL_TOKEN --app actions --body $(op read "op://Personal/Github/Section/ID")
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
