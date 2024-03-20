@@ -16,7 +16,7 @@ This is nearly identical to [github-actions-repo-sync](https://github.com/kbrash
 Create a new file called `.github/workflows/repo-sync.yml` that looks like so:
 
 ```yaml
-name: Repo Metadata Sync
+name: Repository Metadata Sync
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Fetching Local Repository
         uses: actions/checkout@v4
-      - name: Repo Metadata Sync
+      - name: Repository Metadata Sync
         uses: iloveitaly/github-actions-metadata-sync@v1
         with:
           TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
@@ -43,7 +43,7 @@ gh secret set GH_PERSONAL_TOKEN --app actions --body ghp_the_key
 Alternatively, you can manually specify the type and path (these are inferred from the repo type by default):
 
 ```yaml
-name: Repo Metadata Sync
+name: Repository Metadata Sync
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: Fetching Local Repository
         uses: actions/checkout@v4
-      - name: Repo Metadata Sync
+      - name: Repository Metadata Sync
         uses: iloveitaly/github-actions-metadata-sync@v1
         with:
           TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}

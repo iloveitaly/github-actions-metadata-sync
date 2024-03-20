@@ -1,4 +1,4 @@
-name: 'Repo Metadata Sync'
+name: 'Repository Metadata Sync'
 description: 'Github Action to sync repo metadata (description, topics, homepage) from code (npm, nuget, python) to repo'
 author: 'iloveitaly'
 branding:
