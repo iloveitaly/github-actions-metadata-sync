@@ -1,8 +1,6 @@
-# GitHub Metadata Sync
+# GitHub Metadata Sync [![version](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)
 
-Github Action to sync repo metadata from code to repo.
-
-[![version](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)](https://img.shields.io/github/v/release/iloveitaly/github-actions-metadata-sync)
+Github Action to sync repo metadata (description, homepage, topics) from code to repo.
 
 ## Use Cases
 
@@ -18,21 +16,45 @@ This is nearly identical to [github-actions-repo-sync](https://github.com/kbrash
 Create a new file called `.github/workflows/repo-sync.yml` that looks like so:
 
 ```yaml
-name: Repo Sync
+name: Repo Metadata Sync
 
 on:
   push:
-    branches:
-      - main
-  schedule:
-    - cron: 0 0 * * *
+    branches: [main]
 
 jobs:
   repo_sync:
     runs-on: ubuntu-latest
     steps:
       - name: Fetching Local Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: Repo Metadata Sync
+        uses: iloveitaly/github-actions-metadata-sync@v1
+        with:
+          TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
+```
+
+Note that the built in `secrets.github_token` does not have the necessary permissions to update the repo description. You must use a personal access token instead:
+
+```shell
+gh secret set GH_PERSONAL_TOKEN --app actions --body ghp_the_key
+```
+
+Alternatively, you can manually specify the type and path (these are inferred from the repo type by default):
+
+```yaml
+name: Repo Metadata Sync
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  repo_sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetching Local Repository
+        uses: actions/checkout@v4
       - name: Repo Metadata Sync
         uses: iloveitaly/github-actions-metadata-sync@v1
         with:
@@ -40,37 +62,6 @@ jobs:
           # optional params, these are inferred from the repo type!
           INPUT_TYPE: npm
           INPUT_PATH: package.json
-```
-
-Note that the built in `secrets.github_token` does not have the necessary permissions to update the repo description. Use
-a personal access token instead:
-
-```shell
-gh secret set GH_PERSONAL_TOKEN --app actions --body ghp_the_key
-```
-
-Alternatively, you can let the action infer `TYPE` and `PATH` for you:
-
-```yaml
-name: Repo Sync
-
-on:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: 0 0 * * *
-
-jobs:
-  repo_sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fetching Local Repository
-        uses: actions/checkout@master
-      - name: Sync Repository Metadata
-        uses: iloveitaly/github-actions-repo-sync@v1
-        with:
-          TOKEN: ${{ secrets.GH_PERSONAL_TOKEN }}
 ```
 
 ## Parameters
@@ -91,7 +82,7 @@ jobs:
 
 Note if using standard `PATH` inputs the `TYPE` input is not required.
 
-## Tips
+## Metadata without a package manager
 
 For repo types that aren't listed above (like this one), you can still use this action, just have to get creative.
 
@@ -109,4 +100,4 @@ For example (and I would recommend), you can create a file called `metadata.json
 }
 ```
 
-For example, see [.github/workflows/repo-sync.yml](.github/workflows/repo-metadata-sync.yml)` & `metadata.json` in this repo
+For example, see [.github/workflows/repo-sync.yml](.github/workflows/repo-metadata-sync.yml)` and `metadata.json` in this repo
