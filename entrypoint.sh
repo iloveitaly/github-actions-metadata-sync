@@ -164,12 +164,13 @@ echo "Description: ${DESCRIPTION}"
 if [ "$DESCRIPTION" != null -a "$DESCRIPTION" != "" ]; then
     echo "Updating description for [${GITHUB_REPOSITORY}]"
     jq -n --arg description "$DESCRIPTION" '{description:$description}'
-    jq -n --arg description "$DESCRIPTION" '{description:$description}' |  curl -d @- \
+    jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl -d @- \
         -X PATCH \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
         --silent \
+        --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}
 fi
 
@@ -185,6 +186,7 @@ if [ "$WEBSITE" != null -a "$WEBSITE" != "" ]; then
         -H "Content-Type: application/json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
         --silent \
+        --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}
 fi
 
@@ -199,6 +201,7 @@ if [ "$TOPICS" != null -a "$TOPICS" != "" ]; then
         -H "Accept: application/vnd.github.mercy-preview+json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
         --silent \
+        --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/topics
 fi
 
