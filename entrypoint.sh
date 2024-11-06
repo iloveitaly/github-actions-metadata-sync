@@ -27,12 +27,12 @@ echo "Git username    : $GIT_USERNAME"
 
 # Infer file path if not provided
 if [ -z "$FILE_PATH" ]; then
-    if [ -f "package.json" ]; then
+    if [ -f "metadata.json" ]; then
+        FILE_PATH="metadata.json"
+    elif [ -f "package.json" ]; then
         FILE_PATH="package.json"
     elif [ -f "pyproject.toml" ]; then
         FILE_PATH="pyproject.toml"
-    elif [ -f "metadata.json" ]; then
-        FILE_PATH="metadata.json"
     elif [ -f *.csproj ]; then
         FILE_PATH=$(ls *.csproj | head -n 1)
     else
