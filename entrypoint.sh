@@ -110,16 +110,16 @@ if [ "$REPO_TYPE" == "npm" ]; then
     echo "Repo type: NPM"
     # read in the variables from package.json
     echo "Parsing ${FILE_PATH}"
-    DESCRIPTION=`jq -r '.description' ${FILE_PATH}`
-    WEBSITE=`jq -r '.homepage' ${FILE_PATH}`
-    TOPICS=`jq '.keywords' ${FILE_PATH}`
+    DESCRIPTION=$(jq -r '.description' ${FILE_PATH})
+    WEBSITE=$(jq -r '.homepage' ${FILE_PATH})
+    TOPICS=$(jq '.keywords' ${FILE_PATH})
 
 elif [ "$REPO_TYPE" == "python" ]; then
     echo "Repo type: Python"
     # read in the variables from pyproject.toml
     echo "Parsing ${FILE_PATH}"
-    DESCRIPTION=`yq e '.tool.poetry.description' ${FILE_PATH}`
-    WEBSITE=`yq e '.tool.poetry.homepage' ${FILE_PATH}`
+    DESCRIPTION=$(yq e '.tool.poetry.description' ${FILE_PATH})
+    WEBSITE=$(yq e '.tool.poetry.homepage' ${FILE_PATH})
     # yq responds with `null` if nothing exists, but we want to return an empty array
     TOPICS=$(
         result=$(yq -ojson eval '.tool.poetry.keywords' pyproject.toml)
@@ -136,14 +136,14 @@ elif [ "$REPO_TYPE" == "nuget" ]; then
     WEBSITE=$(grep -oP '(?<=<RepositoryUrl>)[^<]+' "${FILE_PATH}")
     TOPICS_STRING=$(grep -oP '(?<=<PackageTags>)[^<]+' "${FILE_PATH}")
     TOPICS_ARRAY=$(echo $TOPICS_STRING | tr ";" "\n")
-    TOPICS=`printf '%s\n' "${TOPICS_ARRAY[@]}" | jq -R . | jq -s .`
+    TOPICS=$(printf '%s\n' "${TOPICS_ARRAY[@]}" | jq -R . | jq -s .)
 
 elif [ "$REPO_TYPE" == "python" ]; then
     echo "Repo type: Python"
     # read in the variables from pyproject.toml
     echo "Parsing ${FILE_PATH}"
-    DESCRIPTION=`yq e '.tool.poetry.description' ${FILE_PATH}`
-    WEBSITE=`yq e '.tool.poetry.homepage' ${FILE_PATH}`
+    DESCRIPTION=$(yq e '.tool.poetry.description' ${FILE_PATH})
+    WEBSITE=$(yq e '.tool.poetry.homepage' ${FILE_PATH})
     # yq responds with `null` if nothing exists, but we want to return an empty array
     TOPICS=$(
         result=$(yq -ojson eval '.tool.poetry.keywords' pyproject.toml)
