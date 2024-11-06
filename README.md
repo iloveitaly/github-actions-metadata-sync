@@ -84,9 +84,9 @@ Note if using standard `PATH` inputs the `TYPE` input is not required.
 
 ## Metadata without a package manager
 
-For repo types that aren't listed above (like this one), you can still use this action, just have to get creative.
+If you have a project that does not have a supported package manager, or if you just don't want to store metadata in your `package.json` and friends, you can create a file called `metadata.json` and store your metadata there.
 
-For example (and I would recommend), you can create a file called `metadata.json`, choose the npm type, and make the file look like so:
+This file will be prioritized over the package manager metadata files. Here's an example.
 
 ```json
 {
