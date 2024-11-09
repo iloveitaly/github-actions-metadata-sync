@@ -114,22 +114,6 @@ if [ "$REPO_TYPE" == "npm" ]; then
     WEBSITE=$(jq -r '.homepage' ${FILE_PATH})
     TOPICS=$(jq '.keywords' ${FILE_PATH})
 
-elif [ "$REPO_TYPE" == "python" ]; then
-    echo "Repo type: Python"
-    # read in the variables from pyproject.toml
-    echo "Parsing ${FILE_PATH}"
-    DESCRIPTION=$(yq e '.tool.poetry.description' ${FILE_PATH})
-    WEBSITE=$(yq e '.tool.poetry.homepage' ${FILE_PATH})
-    # yq responds with `null` if nothing exists, but we want to return an empty array
-    TOPICS=$(
-        result=$(yq -ojson eval '.tool.poetry.keywords' pyproject.toml)
-        if [ "$result" = "null" ]; then
-            echo "[]"
-        else
-            echo $result
-        fi
-    )
-
 elif [ "$REPO_TYPE" == "nuget" ]; then
     echo "Repo type: NuGet"
     DESCRIPTION=$(grep -oP '(?<=<Description>)[^<]+' "${FILE_PATH}")
