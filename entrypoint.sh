@@ -157,10 +157,15 @@ else
     exit 1
 fi
 
+if [ "$DESCRIPTION" = "null" ] && [ "$DESCRIPTION" = "" ] && [ "$WEBSITE" = "null" ] && [ "$WEBSITE" = "" ] && [ "$TOPICS" = "null" ] && [ "$TOPICS" = "" ]; then
+    echo "Error: No updates found - description, website and topics are all empty"
+    exit 1
+fi
+
 # update the description
 echo " "
 echo "Description: ${DESCRIPTION}"
-if [ "$DESCRIPTION" != null -a "$DESCRIPTION" != "" ]; then
+if [ "$DESCRIPTION" != null ] && [ "$DESCRIPTION" != "" ]; then
     echo "Updating description for [${GITHUB_REPOSITORY}]"
     jq -n --arg description "$DESCRIPTION" '{description:$description}'
     jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl -d @- \
@@ -176,7 +181,7 @@ fi
 # update the homepage
 echo " "
 echo "Website: ${WEBSITE}"
-if [ "$WEBSITE" != null -a "$WEBSITE" != "" ]; then
+if [ "$WEBSITE" != null ] && [ "$WEBSITE" != "" ]; then
     echo "Updating homepage for [${GITHUB_REPOSITORY}]"
     jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}'
     jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}' | curl -d @- \
@@ -192,7 +197,7 @@ fi
 # update the topics
 echo " "
 echo "Topics: ${TOPICS}"
-if [ "$TOPICS" != null -a "$TOPICS" != "" ]; then
+if [ "$TOPICS" != null ] && [ "$TOPICS" != "" ]; then
     echo "Updating topics for [${GITHUB_REPOSITORY}]"
     jq -n --argjson topics "$TOPICS" '{names:$topics}'
     jq -n --argjson topics "$TOPICS" '{names:$topics}' | curl -d @- \
