@@ -142,11 +142,10 @@ elif [ "$REPO_TYPE" == "python" ]; then
     echo "Repo type: Python"
     # read in the variables from pyproject.toml
     echo "Parsing ${FILE_PATH}"
-    DESCRIPTION=$(yq e '.tool.poetry.description' ${FILE_PATH})
-    WEBSITE=$(yq e '.tool.poetry.homepage' ${FILE_PATH})
-    # yq responds with `null` if nothing exists, but we want to return an empty array
+    DESCRIPTION=$(yq e '.tool.poetry.description // .project.description' ${FILE_PATH})
+    WEBSITE=$(yq e '.tool.poetry.homepage // .project.urls.Repository' ${FILE_PATH})
     TOPICS=$(
-        result=$(yq -ojson eval '.tool.poetry.keywords' pyproject.toml)
+        result=$(yq -ojson eval '.tool.poetry.keywords // .project.keywords' ${FILE_PATH})
         if [ "$result" = "null" ]; then
             echo "[]"
         else
