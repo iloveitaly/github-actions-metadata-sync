@@ -1,9 +1,5 @@
 #!/bin/bash
-
-STATUS=0
-
-# remember last error code
-trap 'STATUS=$?' ERR
+set -euo pipefail
 
 # problem matcher must exist in workspace
 cp /error-matcher.json $HOME/repo-sync-error-matcher.json
@@ -192,5 +188,3 @@ if [ "$TOPICS" != null ] && [ "$TOPICS" != "" ]; then
         --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/topics
 fi
-
-exit $STATUS
