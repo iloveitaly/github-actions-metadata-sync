@@ -14,7 +14,6 @@ REPO_TYPE="$INPUT_TYPE"
 FILE_PATH="$INPUT_PATH"
 GITHUB_TOKEN="$INPUT_TOKEN"
 echo "Repo type    : $REPO_TYPE"
-FILES=($RAW_FILES)
 echo "Path         : $FILE_PATH"
 GIT_EMAIL="$INPUT_GIT_EMAIL"
 echo "Git email       : $GIT_EMAIL"
