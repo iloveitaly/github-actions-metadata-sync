@@ -152,7 +152,6 @@ if [ "$DESCRIPTION" != null ] && [ "$DESCRIPTION" != "" ]; then
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
-        --silent \
         --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}
 fi
@@ -168,7 +167,6 @@ if [ "$WEBSITE" != null ] && [ "$WEBSITE" != "" ]; then
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
-        --silent \
         --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}
 fi
@@ -183,7 +181,6 @@ if [ "$TOPICS" != null ] && [ "$TOPICS" != "" ]; then
         -X PUT \
         -H "Accept: application/vnd.github.mercy-preview+json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
-        --silent \
         --fail \
         ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/topics
 fi
