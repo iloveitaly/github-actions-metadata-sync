@@ -147,7 +147,7 @@ echo "Description: ${DESCRIPTION}"
 if [ "$DESCRIPTION" != null ] && [ "$DESCRIPTION" != "" ]; then
     echo "Updating description for [${GITHUB_REPOSITORY}]"
     jq -n --arg description "$DESCRIPTION" '{description:$description}'
-    jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl -d @- \
+    jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl -s -d @- \
         -X PATCH \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
@@ -162,7 +162,7 @@ echo "Website: ${WEBSITE}"
 if [ "$WEBSITE" != null ] && [ "$WEBSITE" != "" ]; then
     echo "Updating homepage for [${GITHUB_REPOSITORY}]"
     jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}'
-    jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}' | curl -d @- \
+    jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}' | curl -s -d @- \
         -X PATCH \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
@@ -177,7 +177,7 @@ echo "Topics: ${TOPICS}"
 if [ "$TOPICS" != null ] && [ "$TOPICS" != "" ]; then
     echo "Updating topics for [${GITHUB_REPOSITORY}]"
     jq -n --argjson topics "$TOPICS" '{names:$topics}'
-    jq -n --argjson topics "$TOPICS" '{names:$topics}' | curl -d @- \
+    jq -n --argjson topics "$TOPICS" '{names:$topics}' | curl -s -d @- \
         -X PUT \
         -H "Accept: application/vnd.github.mercy-preview+json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
