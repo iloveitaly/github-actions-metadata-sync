@@ -115,7 +115,7 @@ elif [ "$REPO_TYPE" == "nuget" ]; then
     WEBSITE=$(grep -oP '(?<=<RepositoryUrl>)[^<]+' "${FILE_PATH}")
     TOPICS_STRING=$(grep -oP '(?<=<PackageTags>)[^<]+' "${FILE_PATH}")
     TOPICS_ARRAY=$(echo $TOPICS_STRING | tr ";" "\n")
-    TOPICS=$(printf '%s\n' "${TOPICS_ARRAY[@]}" | jq -R . | jq -s .)
+    TOPICS=$(printf '%s\n' "${TOPICS_ARRAY[@]}" | jq -R . | jq --no-progress-meter .)
 
 elif [ "$REPO_TYPE" == "python" ]; then
     echo "Repo type: Python"
@@ -147,7 +147,7 @@ echo "Description: ${DESCRIPTION}"
 if [ "$DESCRIPTION" != null ] && [ "$DESCRIPTION" != "" ]; then
     echo "Updating description for [${GITHUB_REPOSITORY}]"
     jq -n --arg description "$DESCRIPTION" '{description:$description}'
-    jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl -s -d @- \
+    jq -n --arg description "$DESCRIPTION" '{description:$description}' | curl --no-progress-meter -d @- \
         -X PATCH \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
@@ -162,7 +162,7 @@ echo "Website: ${WEBSITE}"
 if [ "$WEBSITE" != null ] && [ "$WEBSITE" != "" ]; then
     echo "Updating homepage for [${GITHUB_REPOSITORY}]"
     jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}'
-    jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}' | curl -s -d @- \
+    jq -n --arg homepage "$WEBSITE" '{homepage:$homepage}' | curl --no-progress-meter -d @- \
         -X PATCH \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Content-Type: application/json" \
@@ -177,7 +177,7 @@ echo "Topics: ${TOPICS}"
 if [ "$TOPICS" != null ] && [ "$TOPICS" != "" ]; then
     echo "Updating topics for [${GITHUB_REPOSITORY}]"
     jq -n --argjson topics "$TOPICS" '{names:$topics}'
-    jq -n --argjson topics "$TOPICS" '{names:$topics}' | curl -s -d @- \
+    jq -n --argjson topics "$TOPICS" '{names:$topics}' | curl --no-progress-meter -d @- \
         -X PUT \
         -H "Accept: application/vnd.github.mercy-preview+json" \
         -u ${USERNAME}:${GITHUB_TOKEN} \
