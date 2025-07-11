@@ -47,7 +47,7 @@ name: Repository Metadata Sync
 
 on:
   push:
-    branches: [main]
+    branches: [main,master]
 
 jobs:
   repo_sync:
