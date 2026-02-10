@@ -101,3 +101,25 @@ This file will be prioritized over the package manager metadata files. Here's an
 ```
 
 For example, see [.github/workflows/repo-sync.yml](.github/workflows/repo-metadata-sync.yml) and `metadata.json` in this repo
+
+## Updating Metadata via GH CLI
+
+With a `pyproject.toml` ([Justfile](https://just.systems) recipe):
+
+```
+github_repo_set_metadata:
+  gh repo edit \
+    --description "$(yq  '.project.description' pyproject.toml)" \
+    --homepage "$(yq '.project.urls.Repository' pyproject.toml)" \
+    --add-topic "$(yq '.project.keywords | join(",")' pyproject.toml)"
+```
+
+`metadata.json`:
+
+```
+github_repo_set_metadata:
+  gh repo edit \
+    --description "$(jq -r '.description' metadata.json)" \
+    --homepage "$(jq -r '.homepage' metadata.json)" \
+    --add-topic "$(jq -r '.keywords | join(",")' metadata.json)"
+```
